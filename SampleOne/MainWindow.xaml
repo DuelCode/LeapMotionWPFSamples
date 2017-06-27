@@ -4,9 +4,19 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SampleOne"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        mc:Ignorable="d" 
+        Title="Sample One"  Height="526" Width="750">
     <Grid>
-        
+        <Image x:Name="ImgMain" Width="640" Height="240" VerticalAlignment="Top" Margin="0,30,0,0"/>
+        <InkCanvas x:Name="InkCanvasPnl" Width="640" Height="240" VerticalAlignment="Top" Margin="0,30,0,0"
+                   Background="Transparent"/>
+        <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="10">
+            <TextBlock x:Name="TbkFrameId"/>
+            <TextBlock x:Name="TbkTimestamp"/>
+            <TextBlock x:Name="TbkHandsCount"/>
+            <TextBlock x:Name="TbkFingersCount"/>
+            <TextBlock x:Name="TbkToolsCount"/>
+            <TextBlock x:Name="TbkGesturesCount"/>
+        </StackPanel>
     </Grid>
 </Window>

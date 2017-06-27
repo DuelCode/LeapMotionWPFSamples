@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SampleOne.Properties {
+namespace TouchPoints.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

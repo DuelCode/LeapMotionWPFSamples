@@ -4,8 +4,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
-//using System.Drawing;
-//using System.Drawing.Imaging;
 using System.Threading;
 using System.Windows;
 using System.Windows.Documents;
@@ -193,15 +191,15 @@ namespace OfficialSampleWPF
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             try {
-
                 App.Current.Shutdown();
                 return;
                 // Todo: 执行 this.controller.RemoveListener(this.listener); 时程序会处于“无响应”状态，
                 // 尚不清楚原因。 所以直接结束进程.
-                
+
                 this.isClosing = true;
-                this.controller.RemoveListener(this.listener); 
+                this.controller.RemoveListener(this.listener);
                 this.controller.Dispose();
+
             }
             catch (Exception ex)
             {
