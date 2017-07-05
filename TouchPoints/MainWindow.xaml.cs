@@ -30,11 +30,32 @@ namespace TouchPoints
         public MainWindow()
         {
             InitializeComponent();
+            leap.SetPolicy(Controller.PolicyFlag.POLICY_IMAGES);
 
             CompositionTarget.Rendering += Update;
             touchIndicator.Width = 20;
             touchIndicator.Height = 20;
             touchIndicator.StylusTip = StylusTip.Ellipse;
+        }
+
+        WriteableBitmap bitmap;
+        private void DrawRawImages_WriteableBitmap(byte[] rawImageData, int dWidth, int dHeight)
+        {
+            Dispatcher.BeginInvoke(new Action(delegate ()
+            {
+                if (bitmap == null || ImgCamera.Source == null)
+                {
+                    List<System.Windows.Media.Color> grayscale = new List<System.Windows.Media.Color>();
+                    for (byte i = 0; i < 0xff; i++)
+                    {
+                        grayscale.Add(System.Windows.Media.Color.FromArgb(0xff, i, i, i));
+                    }
+                    BitmapPalette palette = new BitmapPalette(grayscale);
+                    bitmap = new WriteableBitmap(dWidth, dHeight, 72, 72, PixelFormats.Gray8, palette);
+                    ImgCamera.Source = bitmap;
+                }
+                bitmap.WritePixels(new Int32Rect(0, 0, dWidth, dHeight), rawImageData, dWidth * bitmap.Format.BitsPerPixel / 8, 0);
+            }));
         }
 
         protected void Update(object sender, EventArgs e)
@@ -46,9 +67,16 @@ namespace TouchPoints
 
             Leap.Frame frame = leap.Frame();
             InteractionBox interactionBox = leap.Frame().InteractionBox;
+            try
+            {
+                Leap.Image image = frame.Images[0];
+                this.DrawRawImages_WriteableBitmap(image.Data, image.Width, image.Height);
+            }
+            catch { }
 
             foreach (Pointable pointable in leap.Frame().Pointables)
             {
+                Finger oFinger = new Finger(pointable);
                 Leap.Vector normalizedPosition =
                     interactionBox.NormalizePoint(pointable.StabilizedTipPosition);
                 float tx = normalizedPosition.x * windowWidth;

@@ -1,0 +1,20 @@
+﻿<Window x:Class="VirtualHand.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VirtualHand"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="768" Width="1360">
+    <Grid>
+        <Grid Width="544" Height="307.2" Background="Silver"
+               VerticalAlignment="Bottom" HorizontalAlignment="Left">
+            <Image x:Name="ImgMain" />
+        </Grid>
+        <Grid VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="320"
+              Height="240">
+            <Image x:Name="ImgCamera" Width="320" Height="240"/>
+        </Grid>
+        <Canvas x:Name="CvMain"></Canvas>
+    </Grid>
+</Window>
